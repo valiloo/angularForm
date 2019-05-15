@@ -1,0 +1,19 @@
+<form (ngSubmit)='myForm.valid && onSubmit(form)' #myForm="ngForm">
+  <div>
+    <label for="user">User</label>
+    <input name="user" type="text" [(ngModel)]="model.user" #user="ngModel" required minlength='4' required maxlength='25'>
+  </div>
+
+  <span *ngIf="myForm.submitted && (user.dirty || user.touched) && user.errors?.required">Le champs est requis</span>
+  <span *ngIf="myForm.submitted && user.errors?.maxlength">Le champ user ne doit pas dépasser 25 caractères</span>
+  <span *ngIf="myForm.submitted && user.errors?.minlength">Le champ user doit dépasser 4 caractères</span>
+
+  <div>
+    <label for="email">Email</label>
+    <input name="email" type="text" [(ngModel)]="model.email" #email="ngModel" required email>
+  </div>
+
+  <span *ngIf="myForm.submitted && (email.dirty || email.touched) && submit && email.errors?.required">Le champ est requis</span>
+  <span *ngIf="myForm.submitted && email.errors?.email">Le champ email est invalide</span>
+  <button type="submit">Envoyer vos informations</button>
+</form>
